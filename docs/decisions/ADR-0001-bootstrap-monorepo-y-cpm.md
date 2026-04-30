@@ -43,10 +43,23 @@ con `Condition="'$(MSBuildProjectName)' != 'TallerPro.Analyzers'"`.
 ### D-4 — `NuGetAudit=true` + `RestorePackagesWithLockFile=true` desde el bootstrap
 
 Ambas propiedades en `Directory.Build.props` desde el primer commit:
-- `NuGetAuditMode=all`, `NuGetAuditLevel=moderate`: falla el restore si hay CVE moderada o superior.
+- `NuGetAuditMode=direct` (ver Addendum D-4a), `NuGetAuditLevel=moderate`: falla el restore si hay CVE moderada o superior en dependencias directas.
 - `RestorePackagesWithLockFile=true` + `packages.lock.json` commiteado: el grafo de dependencias está fijo en git; CI falla si el lock no coincide.
 
 **Razón**: el bootstrap es el momento más barato para establecer la postura de seguridad. Añadirlo después obliga a revisar todos los paquetes ya instalados.
+
+#### Addendum D-4a — `NuGetAuditMode=direct` en lugar de `all` (2026-04-30)
+
+**Decisión**: durante el bootstrap, `NuGetAuditMode=direct` en lugar de `all`.
+
+**Razón**: `Testcontainers.MsSql` arrastra dependencias transitivas con CVEs conocidos (`Azure.Identity 1.3.0`, `System.Drawing.Common 5.0.0`, etc.) que no podemos controlar sin activar `CentralPackageTransitivePinningEnabled=true`, lo que añade complejidad significativa al grafo de dependencias en esta fase.
+
+**Condición de salida**: cambiar a `NuGetAuditMode=all` cuando:
+1. Se active `CentralPackageTransitivePinningEnabled=true` en `Directory.Packages.props`.
+2. Se pinen las transitivas vulnerables a versiones sin CVE (`Azure.Identity ≥ 1.9.0`, `System.Drawing.Common ≥ 6.0.0`, etc.).
+3. El restore sin `NuGetAudit` warnings en modo `all` se verifique en CI.
+
+**Implicación**: las CVEs de dependencias transitivas no son detectadas automáticamente en CI durante el bootstrap. Se mitiga mediante: (a) `direct` audit cubre nuestros paquetes seed, (b) el lock file previene cambios silenciosos, (c) esta tarea queda registrada para la spec que introduzca pinning transitivo.
 
 ### D-5 — `TallerPro.Linux.slnf` como solution filter para CI ubuntu
 

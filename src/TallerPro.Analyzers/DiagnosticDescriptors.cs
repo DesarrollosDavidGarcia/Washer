@@ -31,11 +31,12 @@ internal static class DiagnosticDescriptors
 
     public static readonly DiagnosticDescriptor TP0004 = new(
         id: "TP0004",
-        title: "Raw SQL without tenant filter",
-        messageFormat: "Raw SQL queries must include tenant filtering via SESSION_CONTEXT or parameterized TenantId",
+        title: "NovitaAi call without PII masking",
+        messageFormat: "Calls to NovitaAiClient must apply PiiMasker to the payload before sending",
         category: "TallerPro.Security",
         defaultSeverity: DiagnosticSeverity.Error,
-        isEnabledByDefault: true);
+        isEnabledByDefault: true,
+        description: "Sending unmasked PII to external LLM APIs violates constitution §PII masking dual.");
 
     public static readonly DiagnosticDescriptor TP0005 = new(
         id: "TP0005",

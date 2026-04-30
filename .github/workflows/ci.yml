@@ -21,8 +21,8 @@ jobs:
 
     steps:
       - name: Checkout
-        # SHA de actions/checkout@v4 — actualizar con Dependabot (Sec-03 / ADR-0001 D-6)
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af68 # v4
+        # SHA de actions/checkout@v4.2.2 — actualizar con Dependabot (Sec-03 / ADR-0001 D-6)
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
 
       - name: Setup .NET
         # SHA de actions/setup-dotnet@v4 — actualizar con Dependabot (Sec-03 / ADR-0001 D-6)
@@ -56,9 +56,13 @@ jobs:
         if: runner.os == 'Windows'
         run: dotnet test TallerPro.sln --no-build -c Release --logger "trx" --results-directory TestResults
 
-      - name: Format check (Linux only)
+      - name: Format check (Linux)
         if: runner.os == 'Linux'
         run: dotnet format TallerPro.Linux.slnf --verify-no-changes
+
+      - name: Format check (Windows)
+        if: runner.os == 'Windows'
+        run: dotnet format TallerPro.sln --verify-no-changes
 
       - name: Upload test results
         if: always()
