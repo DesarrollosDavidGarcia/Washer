@@ -1,0 +1,69 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  # pull_request_target is PROHIBITED — see ADR-0001 D-6 / Sec-04
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: build-and-test (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout
+        # SHA de actions/checkout@v4 — actualizar con Dependabot (Sec-03 / ADR-0001 D-6)
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af68 # v4
+
+      - name: Setup .NET
+        # SHA de actions/setup-dotnet@v4 — actualizar con Dependabot (Sec-03 / ADR-0001 D-6)
+        uses: actions/setup-dotnet@3951f0dfe7a714d19c3b9bbc22f9e4eeaed4cb64 # v4
+        with:
+          dotnet-version: '9.0.203'
+          dotnet-quality: 'ga'
+          cache: true
+
+      - name: Restore (Linux — sin Hybrid)
+        if: runner.os == 'Linux'
+        run: dotnet restore TallerPro.Linux.slnf --locked-mode
+
+      - name: Restore (Windows — solución completa)
+        if: runner.os == 'Windows'
+        run: dotnet restore TallerPro.sln --locked-mode
+
+      - name: Build (Linux)
+        if: runner.os == 'Linux'
+        run: dotnet build TallerPro.Linux.slnf --no-restore -c Release
+
+      - name: Build (Windows — incluye Hybrid)
+        if: runner.os == 'Windows'
+        run: dotnet build TallerPro.sln --no-restore -c Release
+
+      - name: Test (Linux)
+        if: runner.os == 'Linux'
+        run: dotnet test TallerPro.Linux.slnf --no-build -c Release --logger "trx" --results-directory TestResults
+
+      - name: Test (Windows)
+        if: runner.os == 'Windows'
+        run: dotnet test TallerPro.sln --no-build -c Release --logger "trx" --results-directory TestResults
+
+      - name: Format check (Linux only)
+        if: runner.os == 'Linux'
+        run: dotnet format TallerPro.Linux.slnf --verify-no-changes
+
+      - name: Upload test results
+        if: always()
+        # SHA de actions/upload-artifact@v4 — actualizar con Dependabot (Sec-03)
+        uses: actions/upload-artifact@65462800fd760344b1a7b4382951275a0abb4808 # v4
+        with:
+          name: test-results-${{ matrix.os }}
+          path: TestResults/

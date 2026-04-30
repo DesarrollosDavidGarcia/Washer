@@ -1,0 +1,24 @@
+{
+  "solution": {
+    "path": "TallerPro.sln",
+    "projects": [
+      "src\\TallerPro.Domain\\TallerPro.Domain.csproj",
+      "src\\TallerPro.Application\\TallerPro.Application.csproj",
+      "src\\TallerPro.Infrastructure\\TallerPro.Infrastructure.csproj",
+      "src\\TallerPro.Shared\\TallerPro.Shared.csproj",
+      "src\\TallerPro.Components\\TallerPro.Components.csproj",
+      "src\\TallerPro.Api\\TallerPro.Api.csproj",
+      "src\\TallerPro.LocalDb\\TallerPro.LocalDb.csproj",
+      "src\\TallerPro.Web\\TallerPro.Web.csproj",
+      "src\\TallerPro.Admin\\TallerPro.Admin.csproj",
+      "src\\TallerPro.Observability\\TallerPro.Observability.csproj",
+      "src\\TallerPro.Security\\TallerPro.Security.csproj",
+      "src\\TallerPro.Analyzers\\TallerPro.Analyzers.csproj",
+      "tests\\TallerPro.Domain.Tests\\TallerPro.Domain.Tests.csproj",
+      "tests\\TallerPro.Application.Tests\\TallerPro.Application.Tests.csproj",
+      "tests\\TallerPro.Integration.Tests\\TallerPro.Integration.Tests.csproj",
+      "tests\\TallerPro.Isolation.Tests\\TallerPro.Isolation.Tests.csproj",
+      "tests\\TallerPro.E2E.Tests\\TallerPro.E2E.Tests.csproj"
+    ]
+  }
+}

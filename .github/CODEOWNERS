@@ -1,0 +1,13 @@
+# TallerPro CODEOWNERS
+# Formato: <path> <@github-handle> [<@github-handle>...]
+# Requiere "Require review from Code Owners" en Branch Protection de main.
+#
+# TallerPro.Analyzers ejecuta código en el proceso del compilador durante dotnet build.
+# Cualquier cambio malicioso puede exfiltrar variables de entorno de CI.
+# Requiere 2 revisores: founder + dev senior (ADR-0001 D-7).
+#
+# NOTA: sustituir @founder y @dev-senior con handles reales de GitHub antes del primer push.
+
+src/TallerPro.Analyzers/   @founder @dev-senior
+.github/CODEOWNERS         @founder
+.github/workflows/         @founder @dev-senior
