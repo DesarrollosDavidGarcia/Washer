@@ -101,3 +101,20 @@
 - RF-11: añadido (git init + rama main + primer commit).
 - Sección "Preguntas abiertas": todos los PA marcados `[x]`.
 - Sección "Historial de clarificaciones": añadida.
+
+## Cierre
+
+- **Fecha**: 2026-04-30
+- **Estado**: `implemented`
+- **Commits**: `3b7e156` (bootstrap), `e99d193` (code-reviewer fixes)
+- **Build**: `dotnet build TallerPro.Linux.slnf -c Release` → exit 0, 0 warnings, 0 errors
+- **Tests**: 5 suites, 0 tests, exit 0 (CA-02 ✅)
+- **Format**: `dotnet format --verify-no-changes` → exit 0 (CA-07 ✅)
+- **CA-03**: TP0005 detecta `Console.WriteLine` ✅
+- **CA-04**: verificación manual IDE pendiente
+- **CA-05**: pendiente de push a GitHub remote
+- **Revisores**: code-reviewer `approve` + security-reviewer `approve`
+- **Desvíos del plan**:
+  - `NuGetAuditMode=direct`: transitivas CVE en Testcontainers.MsSql → documentado ADR-0001 D-4a
+  - `Program.cs` stubs Api/Web/Admin: requerido por `Microsoft.NET.Sdk.Web`
+- **Backlog**: CODEOWNERS handles reales; `NuGetAuditMode=all`+transitive pinning; ADR-0007 analyzer

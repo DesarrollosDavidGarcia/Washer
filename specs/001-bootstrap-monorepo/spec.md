@@ -1,7 +1,7 @@
 # Spec: Bootstrap del monorepo TallerPro
 
 - **ID**: 001
-- **Estado**: draft
+- **Estado**: implemented
 - **Fecha**: 2026-04-22
 
 ## Resumen
