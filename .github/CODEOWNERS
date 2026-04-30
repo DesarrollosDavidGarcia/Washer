@@ -4,10 +4,9 @@
 #
 # TallerPro.Analyzers ejecuta código en el proceso del compilador durante dotnet build.
 # Cualquier cambio malicioso puede exfiltrar variables de entorno de CI.
-# Requiere 2 revisores: founder + dev senior (ADR-0001 D-7).
-#
-# NOTA: sustituir @founder y @dev-senior con handles reales de GitHub antes del primer push.
+# ADR-0001 D-7: requiere 2 revisores (founder + dev senior).
+# NOTA: solo-reviewer hasta incorporar dev senior al equipo.
 
-src/TallerPro.Analyzers/   @founder @dev-senior
-.github/CODEOWNERS         @founder
-.github/workflows/         @founder @dev-senior
+src/TallerPro.Analyzers/    @DesarrollosDavidGarcia
+.github/CODEOWNERS          @DesarrollosDavidGarcia
+.github/workflows/          @DesarrollosDavidGarcia

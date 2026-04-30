@@ -1,6 +1,6 @@
 # TallerPro
 
-[![CI](https://github.com/owner/Washer/actions/workflows/ci.yml/badge.svg)](https://github.com/owner/Washer/actions/workflows/ci.yml)
+[![CI](https://github.com/DesarrollosDavidGarcia/Washer/actions/workflows/ci.yml/badge.svg)](https://github.com/DesarrollosDavidGarcia/Washer/actions/workflows/ci.yml)
 
 **SaaS multitenant para gestión de talleres mecánicos en México.** Arranque en Chihuahua/Bajío; escalable a LatAm. Meta MVP: 10 tenants facturando en 90 días.
 
@@ -12,7 +12,7 @@ Stack: .NET 9 · Blazor Hybrid (MAUI Windows + Android) · MudBlazor · ASP.NET 
 
 ```bash
 # Prerrequisito: .NET 9 SDK (9.0.203+)
-git clone <repo-url> && cd Washer
+git clone https://github.com/DesarrollosDavidGarcia/Washer.git && cd Washer
 
 # Linux / macOS (sin TallerPro.Hybrid — requiere workload MAUI)
 dotnet restore TallerPro.Linux.slnf --locked-mode
