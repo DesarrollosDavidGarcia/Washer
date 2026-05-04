@@ -32,6 +32,10 @@ jobs:
           cache: true
           cache-dependency-path: '**/packages.lock.json'
 
+      - name: Install MAUI workloads (Windows)
+        if: runner.os == 'Windows'
+        run: dotnet workload install maui-windows
+
       - name: Restore (Linux — sin Hybrid)
         if: runner.os == 'Linux'
         run: dotnet restore TallerPro.Linux.slnf --locked-mode

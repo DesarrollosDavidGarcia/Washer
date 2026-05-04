@@ -1,0 +1,20 @@
+{
+  "version": 2,
+  "dependencies": {
+    "net9.0-android35.0": {
+      "Microsoft.NET.ILLink.Tasks": {
+        "type": "Direct",
+        "requested": "[9.0.4, )",
+        "resolved": "9.0.4",
+        "contentHash": "xUdlUxiFwXhTYhB4VxKg/IA0+jlZXJPo70LYuMryWbJHdonIpZjw+7DO2B0pWwpXIOs6MlH5WVXPEtfrGEcVZA=="
+      }
+    },
+    "net9.0-android35.0/android-arm64": {},
+    "net9.0-android35.0/android-x64": {},
+    "net9.0-android35.0/win10-x64": {},
+    "net9.0-windows10.0.19041": {},
+    "net9.0-windows10.0.19041/android-arm64": {},
+    "net9.0-windows10.0.19041/android-x64": {},
+    "net9.0-windows10.0.19041/win10-x64": {}
+  }
+}
