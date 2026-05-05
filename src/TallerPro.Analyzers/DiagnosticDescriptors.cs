@@ -6,12 +6,12 @@ internal static class DiagnosticDescriptors
 {
     public static readonly DiagnosticDescriptor TP0001 = new(
         id: "TP0001",
-        title: "Direct tenant ID access without global query filter",
-        messageFormat: "Tenant data must be accessed through the scoped DbContext with global query filters enabled",
+        title: "IgnoreQueryFilters() requiere autorización explícita",
+        messageFormat: "Llamada a IgnoreQueryFilters() en método '{0}' sin [AllowIgnoreQueryFilters] con razón no vacía",
         category: "TallerPro.Security",
         defaultSeverity: DiagnosticSeverity.Error,
         isEnabledByDefault: true,
-        description: "Bypassing global query filters exposes cross-tenant data leaks.");
+        description: "IgnoreQueryFilters() omite los global query filters de tenant — use [AllowIgnoreQueryFilters(\"razón\")] con razón documentada.");
 
     public static readonly DiagnosticDescriptor TP0002 = new(
         id: "TP0002",

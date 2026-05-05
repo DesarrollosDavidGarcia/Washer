@@ -3,17 +3,32 @@
     <TargetFramework>net9.0</TargetFramework>
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
-    <NoWarn>$(NoWarn);CS8021</NoWarn>
+    <!-- CS8021: no NuGet package found for metadata reference (Shouldly)
+         CA1707: test method names intentionally use underscores (Metodo_Escenario_Resultado convention)
+         CA1852: test helper classes do not need to be sealed -->
+    <!-- NU1701: Microsoft.CodeAnalysis.CSharp.Analyzer.Testing.XUnit 1.1.2 brings
+         legacy transitive deps (Workspaces, Microsoft.Composition) that target
+         .NETFramework; they run fine on net9.0 via compatibility shims. -->
+    <NoWarn>$(NoWarn);CS8021;CA1707;CA1852;NU1701</NoWarn>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.Analyzers">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.NET.Test.Sdk" />
     <PackageReference Include="xunit" />
     <PackageReference Include="xunit.runner.visualstudio" />
     <PackageReference Include="coverlet.collector" />
     <PackageReference Include="Shouldly" />
     <PackageReference Include="NSubstitute" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Analyzer.Testing.XUnit" />
+    <PackageReference Include="Serilog" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="../../src/TallerPro.Application/TallerPro.Application.csproj" />
+    <ProjectReference Include="../../src/TallerPro.Security/TallerPro.Security.csproj" />
+    <ProjectReference Include="../../src/TallerPro.Analyzers/TallerPro.Analyzers.csproj" />
+    <ProjectReference Include="../../src/TallerPro.Infrastructure/TallerPro.Infrastructure.csproj" />
   </ItemGroup>
 </Project>

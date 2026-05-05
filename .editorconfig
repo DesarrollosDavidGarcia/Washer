@@ -164,14 +164,22 @@ dotnet_naming_rule.types_pascal.style = pascal
 dotnet_naming_symbols.types_and_methods.applicable_kinds = class, struct, enum, delegate, method, property, event
 dotnet_naming_style.pascal.capitalization = pascal_case
 
-# Private fields: _camelCase
+# Private instance fields: _camelCase (excluye `static readonly` que se trata como constante)
 dotnet_naming_rule.private_fields_underscore.severity = warning
-dotnet_naming_rule.private_fields_underscore.symbols = private_fields
+dotnet_naming_rule.private_fields_underscore.symbols = private_instance_fields
 dotnet_naming_rule.private_fields_underscore.style = underscore_camel
-dotnet_naming_symbols.private_fields.applicable_kinds = field
-dotnet_naming_symbols.private_fields.applicable_accessibilities = private
+dotnet_naming_symbols.private_instance_fields.applicable_kinds = field
+dotnet_naming_symbols.private_instance_fields.applicable_accessibilities = private
 dotnet_naming_style.underscore_camel.required_prefix = _
 dotnet_naming_style.underscore_camel.capitalization = camel_case
+
+# Private static readonly fields: PascalCase (constantes lógicas)
+dotnet_naming_rule.private_static_readonly_pascal.severity = warning
+dotnet_naming_rule.private_static_readonly_pascal.symbols = private_static_readonly_fields
+dotnet_naming_rule.private_static_readonly_pascal.style = pascal
+dotnet_naming_symbols.private_static_readonly_fields.applicable_kinds = field
+dotnet_naming_symbols.private_static_readonly_fields.applicable_accessibilities = private
+dotnet_naming_symbols.private_static_readonly_fields.required_modifiers = static, readonly
 
 # Constants: PascalCase
 dotnet_naming_rule.constants_pascal.severity = warning
@@ -195,6 +203,14 @@ dotnet_naming_symbols.async_methods.applicable_kinds = method
 dotnet_naming_symbols.async_methods.required_modifiers = async
 dotnet_naming_style.async_suffix.required_suffix = Async
 dotnet_naming_style.async_suffix.capitalization = pascal_case
+
+# ---------------------------------------------------------------------------
+# Overrides para proyectos de tests
+# ---------------------------------------------------------------------------
+# Los nombres de tests xUnit por convención no usan sufijo Async aunque sean async.
+# Tampoco aplica el prefijo `_` porque los métodos parametrizados pueden tener locals con guion bajo.
+[tests/**/*.cs]
+dotnet_diagnostic.IDE1006.severity = none
 
 # ---------------------------------------------------------------------------
 # TallerPro Roslyn Analyzer — severidades (RF-05)
