@@ -3,7 +3,10 @@
     <TargetFramework>net9.0</TargetFramework>
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
-    <NoWarn>$(NoWarn);CS8021</NoWarn>
+    <!-- CS8021: no NuGet package found for metadata reference (Shouldly)
+         CA1707: test method names intentionally use underscores (Metodo_Escenario_Resultado convention)
+         CA1852: test helper classes do not need to be sealed -->
+    <NoWarn>$(NoWarn);CS8021;CA1707;CA1852</NoWarn>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" />
